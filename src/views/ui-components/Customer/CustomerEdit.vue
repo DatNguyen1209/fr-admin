@@ -37,7 +37,7 @@ const handleUpdate = async () => {
       address: address.value,
     };
     const res = await axios.post(
-      "http://localhost:8081/api/v1/user/update/" + props.data?.id,
+      "http://localhost:8080/api/v1/user/update/" + props.data?.id,
       dataUpdate
     );
     emit("update");

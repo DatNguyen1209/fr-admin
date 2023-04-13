@@ -65,20 +65,23 @@ const handleClose = () => {
             <v-row>
               <v-col cols="6">
                 <v-text-field
+                  color="primary"
                   v-model="hotelName"
                   required
                   label="Tên khách sạn"
                 ></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field
-                  label="Loại khách sạn"
+                <v-combobox
+                  color="primary"
                   v-model="hotelType"
-                  required="không được để trống!!"
-                ></v-text-field>
+                  label="Loại khách sạn"
+                  :items="['Homestay', 'Hotel', 'Resort', 'Villa']"
+                ></v-combobox>
               </v-col>
               <v-col cols="6">
                 <v-text-field
+                  color="primary"
                   label="Giá từ"
                   v-model="fromPrice"
                   required="không được để trống!!"
@@ -86,6 +89,7 @@ const handleClose = () => {
               </v-col>
               <v-col cols="6">
                 <v-text-field
+                  color="primary"
                   v-model="phone"
                   label="Điện thoại"
                   required
@@ -93,6 +97,7 @@ const handleClose = () => {
               </v-col>
               <v-col cols="6">
                 <v-text-field
+                  color="primary"
                   v-model="rated"
                   label="Đánh giá"
                   required
@@ -100,6 +105,7 @@ const handleClose = () => {
               </v-col>
               <v-col cols="12">
                 <v-file-input
+                  color="primary"
                   v-model="images"
                   label="File input"
                   ref="file"
@@ -115,9 +121,18 @@ const handleClose = () => {
                   />
                 </div>
               </v-col>
-
               <v-col cols="12">
                 <v-text-field
+                  color="primary"
+                  v-model="address"
+                  label="Địa chỉ"
+                  persistent-hint
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  color="primary"
                   v-model="description"
                   label="Mô tả"
                   hint="example of persistent helper text"

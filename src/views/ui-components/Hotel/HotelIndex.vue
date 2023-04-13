@@ -3,10 +3,13 @@ import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import moment from "moment";
 import HotelAdd from "./HotelAdd.vue";
+import HotelEdit from "./HotelEdit.vue";
 
 const desserts = ref([]);
+const isOpenEdit = ref(false);
 const page = ref(1);
 const isOpenAdd = ref(false);
+const dataEdit = ref();
 const totalPage = ref(0);
 const totalRecords = ref(0);
 
@@ -40,6 +43,21 @@ const handleAdd = () => {
 const handleClose = () => {
   isOpenAdd.value = false;
 };
+const openDialogEdit = (data) => {
+  console.log(data);
+  dataEdit.value = data;
+  isOpenEdit.value = true;
+};
+
+const openDialogDelete = (data) => {};
+const handleUpdate = () => {
+  console.log("run");
+  isOpenEdit.value = false;
+  getData();
+};
+const handleUpdateClose = () => {
+  isOpenEdit.value = false;
+};
 </script>
 
 <template>
@@ -71,6 +89,11 @@ const handleClose = () => {
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
               Loại khách sạn
+            </th>
+            <th
+              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
+            >
+              Địa chỉ
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
@@ -124,9 +147,14 @@ const handleClose = () => {
             <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.hotelName }}</td>
             <td class="text-center">{{ item.hotelType }}</td>
+            <td style="min-width: 200px" class="text-center">
+              {{ item.address }}
+            </td>
             <td class="text-center">{{ item.phone }}</td>
             <td class="text-center">{{ item.fromPrice }} VNĐ</td>
-            <td class="text-center">{{ item.description }}</td>
+            <td style="min-width: 230px" class="text-center">
+              {{ item.description }}
+            </td>
             <td class="text-center">
               <img
                 style="height: 100px; width: 80px; border-radius: 4px"
@@ -150,6 +178,7 @@ const handleClose = () => {
               <v-btn
                 icon="mdi-pencil"
                 color="warning"
+                @click="openDialogEdit(item)"
                 class="mr-1"
                 size="small"
               ></v-btn>
@@ -194,6 +223,12 @@ const handleClose = () => {
     @close="handleClose"
     @add="handleAdd"
     :data="dataAdd"
+  />
+  <HotelEdit
+    :isOpen="isOpenEdit"
+    @update="handleUpdate"
+    @close="handleUpdateClose"
+    :data="dataEdit"
   />
 </template>
 <style>

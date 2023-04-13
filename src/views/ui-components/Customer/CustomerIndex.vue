@@ -22,7 +22,7 @@ const getData = async () => {
   try {
     const res = await axios.get(
       `http://localhost:8080/api/v1/user/getAllUserByRoleName?page=${page.value}&size=5`
-    )
+    );
     desserts.value = res.data.content;
     totalPage.value = res.data.totalPages;
     totalElements.value = res.data.totalElements;
