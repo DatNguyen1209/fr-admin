@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
+import router from "@/router";
 import axios from "axios";
 import moment from "moment";
 import HotelAdd from "./HotelAdd.vue";
@@ -133,11 +134,6 @@ const handleUpdateClose = () => {
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
-              Thêm phòng
-            </th>
-            <th
-              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
-            >
               Thêm ảnh
             </th>
           </tr>
@@ -182,19 +178,18 @@ const handleUpdateClose = () => {
                 class="mr-1"
                 size="small"
               ></v-btn>
-              <v-btn
+              <!-- <v-btn
                 icon="mdi-delete"
                 @click="openDialogDelete(item)"
                 color="errorr"
                 size="small"
-              ></v-btn>
-            </td>
-            <td style="text-align: center">
+              ></v-btn> -->
               <v-btn
-                icon="mdi-bed"
+                icon="mdi-eye"
                 color="warning"
                 class="mr-1"
                 size="small"
+                @click="router.push('/ui-components/hotels/' + item.id)"
               ></v-btn>
             </td>
             <td style="text-align: center">

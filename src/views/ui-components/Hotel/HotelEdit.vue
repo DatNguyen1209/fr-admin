@@ -31,6 +31,7 @@ watch(
       fromPrice.value = props.data?.fromPrice;
       rated.value = props.data?.rated;
       description.value = props.data?.description;
+      imgUrls.value = props.data?.image;
     }
   }
 );
@@ -39,7 +40,7 @@ const selectFile = async (e) => {
     const img = new FormData();
     img.append("file", images.value[0]);
     const res = await axioss.post("/uploadMultipleFiless", img);
-    imgUrls.value = res.data;
+    imgUrls.value = res.data[0].fileDownloadUri;
   } catch (error) {
     console.log(error);
   }
@@ -51,7 +52,7 @@ const handleUpdate = async () => {
       hotelType: hotelType.value,
       phone: phone.value,
       address: address.value,
-      image: imgUrls.value[0].fileDownloadUri,
+      image: imgUrls.value,
       rated: rated.value,
       description: description.value,
       fromPrice: fromPrice.value,
@@ -125,14 +126,13 @@ const handleClose = () => {
                 ref="file"
                 @change="selectFile"
               ></v-file-input>
-              <div v-if="imgUrls.length">
+              <div v-if="imgUrls">
                 <img
                   style="width: 100px; height: 140px"
-                  v-for="(img, index) in imgUrls"
-                  :key="index"
-                  :src="img.fileDownloadUri"
+                  :src="imgUrls"
                   alt=""
                 />
+                <!-- v-for="(img, index) in imgUrls" -->
               </div>
             </v-col>
             <v-col cols="12">

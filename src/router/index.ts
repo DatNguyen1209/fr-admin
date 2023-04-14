@@ -50,6 +50,11 @@ const router = createRouter({
           path: "ui-components/hotels",
           component: () => import("@/views/ui-components/Hotels.vue"),
         },
+        {
+          path: "ui-components/hotels/:id",
+          name: "Room",
+          component: () => import("@/views/ui-components/Room/RoomIndex.vue"),
+        },
       ],
     },
     {
@@ -59,16 +64,18 @@ const router = createRouter({
     },
   ],
 });
-// router.beforeEach(async (to, from) => {
-//   const isAuthenticated = JSON.parse(localStorage.getItem("user")); 
-//   if (
-//     // make sure the user is authenticated
-//     !isAuthenticated &&
-//     // Avoid an infinite redirect
-//     to.name !== "Login"
-//   ) {
-//     // redirect the user to the login page
-//     return { name: "Login" };
-//   }
-// });
+router.beforeEach(async (to, from) => {
+  const isAuthenticated = localStorage.getItem("token");
+  console.log(isAuthenticated);
+
+  if (
+    // make sure the user is authenticated
+    !isAuthenticated &&
+    // Avoid an infinite redirect
+    to.name !== "Login"
+  ) {
+    // redirect the user to the login page
+    return { name: "Login" };
+  }
+});
 export default router;

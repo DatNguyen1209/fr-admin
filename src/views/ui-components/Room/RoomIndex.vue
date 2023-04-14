@@ -3,13 +3,16 @@ import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import moment from "moment";
 import RoomAdd from "./RoomAdd.vue";
+import { useRoute } from "vue-router";
 const desserts = ref([]);
 const page = ref(1);
 const isOpenAdd = ref(false);
 const totalPage = ref(0);
 const totalRecords = ref(0);
+const route = useRoute();
 
 onMounted(() => {
+  console.log(route.params.id);
   getData();
 });
 watch(page, () => {
@@ -18,7 +21,7 @@ watch(page, () => {
 const getData = async () => {
   try {
     const res = await axios.get(
-      `http://localhost:8081/api/v1/hotel/getAll?page=${page.value}&size=5`
+      `http://localhost:8080/api/v1/room/getallroom?page=${page.value}&size=5`
     );
     desserts.value = res.data.data;
     totalPage.value = res.data.totalPages;
@@ -64,32 +67,32 @@ const handleClose = () => {
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
-              Tên khách sạn
+              Tên phòng
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
-              Loại khách sạn
+              Giá phòng
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
-              Điện thoại
+              Diện tích
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
-              Giá từ
-            </th>
-            <th
-              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
-            >
-              Mô tả
+              Loại phòng
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
               Hình ảnh
+            </th>
+            <th
+              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
+            >
+              Trạng thái
             </th>
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
@@ -111,15 +114,14 @@ const handleClose = () => {
         <tbody>
           <tr v-for="item in desserts" :key="item.id">
             <td class="text-center">{{ item.id }}</td>
-            <td class="text-center">{{ item.hotelName }}</td>
-            <td class="text-center">{{ item.hotelType }}</td>
-            <td class="text-center">{{ item.phone }}</td>
-            <td class="text-center">{{ item.fromPrice }} VNĐ</td>
-            <td class="text-center">{{ item.description }}</td>
+            <td class="text-center">{{ item.roomName }}</td>
+            <td class="text-center">{{ item.price }} VNĐ</td>
+            <td class="text-center">{{ item.capacity }}</td>
+            <td class="text-center">{{ item.bedType }}</td>
             <td class="text-center">
               <img
                 style="height: 100px; width: 80px; border-radius: 4px"
-                :src="`http://localhost:8081/uploads/${item.images[0].url}`"
+                :src="`${item.image}`"
                 alt=""
               />
             </td>
@@ -128,6 +130,7 @@ const handleClose = () => {
                 moment(item.createdDate).format("dddd, MMMM Do YYYY, h:mm:ss a")
               }}
             </td>
+            <td class="text-center">{{ item.status }}</td>
             <td class="text-center">
               {{
                 moment(item.modifiedDate).format(
@@ -157,12 +160,12 @@ const handleClose = () => {
   <div class="text-center">
     <v-pagination
       v-model="page"
-      :length="totalPage"
+      :length="totalPages"
       color="success"
       rounded="circle"
     ></v-pagination>
   </div>
-  <HotelAdd
+  <RoomAdd
     :isOpen="isOpenAdd"
     @close="handleClose"
     @add="handleAdd"
