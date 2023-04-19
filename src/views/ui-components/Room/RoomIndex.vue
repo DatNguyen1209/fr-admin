@@ -5,27 +5,22 @@ import moment from "moment";
 import RoomAdd from "./RoomAdd.vue";
 import { useRoute } from "vue-router";
 const desserts = ref([]);
-const page = ref(1);
 const isOpenAdd = ref(false);
-const totalPage = ref(0);
-const totalRecords = ref(0);
 const route = useRoute();
 
 onMounted(() => {
   console.log(route.params.id);
   getData();
 });
-watch(page, () => {
-  getData();
-});
+// watch(page, () => {
+//   getData();
+// });
 const getData = async () => {
   try {
     const res = await axios.get(
-      `http://localhost:8080/api/v1/room/getallroom?page=${page.value}&size=5`
+      "http://localhost:8080/api/v1/hotel/getbyid/" + route.params.id
     );
-    desserts.value = res.data.data;
-    totalPage.value = res.data.totalPages;
-    totalRecords.value = res.data.totalRecords;
+    desserts.value = res.data.rooms;
   } catch (e) {
     console.error(e);
   }
@@ -116,7 +111,7 @@ const handleClose = () => {
             <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.roomName }}</td>
             <td class="text-center">{{ item.price }} VNĐ</td>
-            <td class="text-center">{{ item.capacity }}</td>
+            <td class="text-center">{{ item.capacity }}m²</td>
             <td class="text-center">{{ item.bedType }}</td>
             <td class="text-center">
               <img
@@ -125,12 +120,12 @@ const handleClose = () => {
                 alt=""
               />
             </td>
+            <td class="text-center">{{ item.status }}</td>
             <td class="text-center">
               {{
                 moment(item.createdDate).format("dddd, MMMM Do YYYY, h:mm:ss a")
               }}
             </td>
-            <td class="text-center">{{ item.status }}</td>
             <td class="text-center">
               {{
                 moment(item.modifiedDate).format(
@@ -157,14 +152,14 @@ const handleClose = () => {
       </v-table>
     </div>
   </div>
-  <div class="text-center">
+  <!-- <div class="text-center">
     <v-pagination
       v-model="page"
       :length="totalPages"
       color="success"
       rounded="circle"
     ></v-pagination>
-  </div>
+  </div> -->
   <RoomAdd
     :isOpen="isOpenAdd"
     @close="handleClose"

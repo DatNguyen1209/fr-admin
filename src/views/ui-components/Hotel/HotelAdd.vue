@@ -22,7 +22,9 @@ const imgUrls = ref([]);
 const selectFile = async (e) => {
   try {
     const img = new FormData();
-    img.append("file", images.value[0]);
+    images.value.forEach((element) => {
+      img.append("file", element);
+    });
     const res = await axios.post("/uploadMultipleFiless", img);
     imgUrls.value = res.data;
   } catch (error) {
@@ -39,7 +41,7 @@ const handleAdd = async () => {
       rated: rated.value,
       address: address.value,
       description: description.value,
-      image: imgUrls.value[0].fileDownloadUri,
+      image: imgUrls.value.map((img) => img.fileDownloadUri).join(","),
     };
     const res = await axios.post("/v1/hotel/createhotel", dataAdd);
     emit("add");
@@ -106,6 +108,7 @@ const handleClose = () => {
               <v-col cols="12">
                 <v-file-input
                   color="primary"
+                  multiple=""
                   v-model="images"
                   label="File input"
                   ref="file"

@@ -152,11 +152,16 @@ const handleUpdateClose = () => {
               {{ item.description }}
             </td>
             <td class="text-center">
-              <img
-                style="height: 100px; width: 80px; border-radius: 4px"
-                :src="`${item.image}`"
-                alt=""
-              />
+              <div v-if="item.image">
+                <!-- :src="`${item.image?.split(',')?.[0]}`" -->
+                <img
+                  v-for="img in item.image?.split(',')"
+                  style="height: 100px; width: 80px; border-radius: 4px"
+                  alt=""
+                  :src="`${img}`"
+                />
+                <img src="" alt="" />
+              </div>
             </td>
             <td class="text-center">
               {{

@@ -36,10 +36,8 @@ onMounted(() => {
       </template>
 
       <v-list class="pa-6" elevation="10" rounded="lg" @submit.prevent="logOut">
-        <v-list-item class="pa-3 mb-2" rounded="lg">
-        </v-list-item>
-        <v-list-item class="pa-3 mb-2" rounded="lg">
-        </v-list-item>
+        <v-list-item class="pa-3 mb-2" rounded="lg"> </v-list-item>
+        <v-list-item class="pa-3 mb-2" rounded="lg"> </v-list-item>
         <v-btn
           @click="logOut"
           type="submit"
