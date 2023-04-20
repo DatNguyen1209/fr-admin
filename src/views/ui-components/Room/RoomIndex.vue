@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 import moment from "moment";
 import RoomAdd from "./RoomAdd.vue";
@@ -120,7 +120,9 @@ const handleClose = () => {
                 alt=""
               />
             </td>
-            <td class="text-center">{{ item.status }}</td>
+            <td class="text-center">
+              {{ item.status === 1 ? "Trống" : "Đang được sử dụng" }}
+            </td>
             <td class="text-center">
               {{
                 moment(item.createdDate).format("dddd, MMMM Do YYYY, h:mm:ss a")

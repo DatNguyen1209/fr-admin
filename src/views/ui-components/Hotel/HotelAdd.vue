@@ -86,6 +86,7 @@ const handleClose = () => {
                   color="primary"
                   label="Giá từ"
                   v-model="fromPrice"
+                  :options="{ precision: 2, decimal: '.', thousand: '.' }"
                   required="không được để trống!!"
                 ></v-text-field>
               </v-col>

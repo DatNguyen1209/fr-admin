@@ -131,11 +131,6 @@ const handleUpdateClose = () => {
             >
               Chức năng
             </th>
-            <th
-              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
-            >
-              Thêm ảnh
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -151,12 +146,17 @@ const handleUpdateClose = () => {
             <td style="min-width: 230px" class="text-center">
               {{ item.description }}
             </td>
-            <td class="text-center">
+            <td class="text-center" style="min-width: 350px">
               <div v-if="item.image">
                 <!-- :src="`${item.image?.split(',')?.[0]}`" -->
                 <img
                   v-for="img in item.image?.split(',')"
-                  style="height: 100px; width: 80px; border-radius: 4px"
+                  style="
+                    height: auto;
+                    width: 130px;
+                    border-radius: 4px;
+                    margin: 4px;
+                  "
                   alt=""
                   :src="`${img}`"
                 />
@@ -196,14 +196,6 @@ const handleUpdateClose = () => {
                 size="small"
                 @click="router.push('/ui-components/hotels/' + item.id)"
               ></v-btn>
-            </td>
-            <td style="text-align: center">
-              <v-file-input
-                multiple
-                bg-color="primary"
-                append-inner-icon="mdi-image"
-              >
-              </v-file-input>
             </td>
           </tr>
         </tbody>
