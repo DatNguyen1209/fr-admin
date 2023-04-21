@@ -13,33 +13,45 @@ const login = async () => {
       username: username.value,
       password: password.value,
     });
-  console.log(res.data)
+    console.log(res.data);
     if (res != null) {
-      router.push("/")
+      router.push("/");
       localStorage.setItem(`token`, res.data.accessToken);
-        }
-    
+    }
   } catch (error) {
     console.log(error);
   }
 };
-
 </script>
 
 <template>
   <div class="bg-img">
     <div class="d-flex align-center justify-center" style="height: 100vh">
-      <v-sheet min-width="300" class="mx-auto">
-        <h1 class="title">Đăng nhập hệ thống</h1>
-        <v-form fast-fail style="width: 100%" @submit.prevent="login">
+      <div class="bg-grey-lighten-5 bg-login-form">
+        <h1 class="title">Login to Admin</h1>
+        <div class="mt-3 mb-3">
+          <img
+            class="img-login"
+            src="https://dailysuzukihadong.com/wp-content/uploads/2020/03/unnamed.jpg"
+            alt=""
+          />
+        </div>
+        <v-form
+          validate-on
+          fast-fail
+          style="width: 100%"
+          @submit.prevent="login"
+        >
           <v-text-field
-            variant="outlined"
             v-model="username"
             label="User Name"
+            bg-color="purple"
+            icon="mdi-account"
+            validate
+            class="bg-grey-lighten-1"
           ></v-text-field>
 
           <v-text-field
-            variant="outlined"
             v-model="password"
             label="Password"
             type="Password"
@@ -48,24 +60,29 @@ const login = async () => {
             >Sign in</v-btn
           >
         </v-form>
-      </v-sheet>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .bg-img {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-image: linear-gradient(
-    to right,
-    rgba(88, 37, 123, 0),
-    rgba(88, 37, 123, 1)
-  );
+  background-color: #f5d2bb;
+}
+.bg-login-form {
+  border-radius: 10px;
+  // width: 300px;
+  padding: 20px;
+  width: 360px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.img-login {
+  width: 80px;
+  align-items: center;
+  border-radius: 50%;
+  margin-left: 36%;
 }
 .title {
-  text-transform: uppercase;
   color: #ee8a6a;
   text-align: center;
   margin-bottom: 20px;

@@ -16,6 +16,7 @@ const Lighttheme: ThemeDefinition = {
     error: "#fc4b6c",
     errorr: "#ed2e2e",
     secondary: "#0cb9c5",
+    white: "#ffffff",
   },
 };
 
