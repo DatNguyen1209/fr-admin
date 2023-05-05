@@ -11,7 +11,7 @@ const props = defineProps({
 const emit = defineEmits(["add", "close"]);
 
 const roomName = ref("");
-const price = ref("");
+const price = ref();
 const capacity = ref("");
 const bedType = ref("");
 const hotelId = ref();

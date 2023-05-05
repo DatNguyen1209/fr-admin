@@ -20,11 +20,7 @@ const router = createRouter({
           path: "ui-components/alert",
           component: () => import("@/views/ui-components/Alerts.vue"),
         },
-        {
-          name: "Buttons",
-          path: "ui-components/buttons",
-          component: () => import("@/views/ui-components/Buttons.vue"),
-        },
+
         {
           name: "Customers",
           path: "ui-components/customers",
@@ -35,20 +31,16 @@ const router = createRouter({
           path: "ui-components/cards",
           component: () => import("@/views/ui-components/Cards.vue"),
         },
-        {
-          name: "Menus",
-          path: "ui-components/menus",
-          component: () => import("@/views/ui-components/Menus.vue"),
-        },
-        {
-          name: "Tables",
-          path: "ui-components/tables",
-          component: () => import("@/views/ui-components/Tables.vue"),
-        },
+
         {
           name: "Hotels",
           path: "ui-components/hotels",
           component: () => import("@/views/ui-components/Hotels.vue"),
+        },
+        {
+          name: "Orders",
+          path: "ui-components/orders",
+          component: () => import("@/views/ui-components/Orders.vue"),
         },
         {
           path: "ui-components/hotels/:id",

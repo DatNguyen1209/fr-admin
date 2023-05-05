@@ -14,11 +14,7 @@ export default [
     icon: "mdi-pencil-box-multiple-outline",
     to: "/ui-components/alert",
   },
-  {
-    title: "Hotel",
-    icon: "mdi-home-map-marker",
-    to: "/ui-components/buttons",
-  },
+
   {
     title: "Room",
     icon: "mdi-bed",
@@ -27,7 +23,7 @@ export default [
   {
     title: "Order",
     icon: "mdi-cart-check",
-    to: "/ui-components/menus",
+    to: "/ui-components/orders",
   },
   {
     title: "Hotel",
