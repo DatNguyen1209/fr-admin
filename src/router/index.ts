@@ -52,8 +52,13 @@ const router = createRouter({
         },
         {
           path: "ui-components/hotels/:id",
-          name: "Room",
+          name: "Hotel",
           component: () => import("@/views/ui-components/Room/RoomIndex.vue"),
+        },
+        {
+          path: "ui-components/user",
+          name: "Room",
+          component: () => import("@/views/ui-components/Admin/AdminIndex.vue"),
         },
       ],
     },

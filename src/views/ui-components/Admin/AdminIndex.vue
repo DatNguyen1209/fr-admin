@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
-import CustomerEdit from "./CustomerEdit.vue";
+import AdminEdit from "./AdminEdit.vue";
 import moment from "moment";
 const desserts = ref([]);
 const page = ref(1);
@@ -21,7 +21,7 @@ watch(page, () => {
 const getData = async () => {
   try {
     const res = await axios.get(
-      `http://localhost:8080/api/v1/user/getAllUserByRoleAdmin?page=${page.value}&size=5`
+      `http://localhost:8080/api/v1/user/getAllUserByRoleUser?page=${page.value}&size=5`
     );
     console.log(res.data.content);
     desserts.value = res.data.content;
@@ -129,7 +129,7 @@ const handleClose = () => {
       ></v-pagination>
     </div>
   </div>
-  <CustomerEdit
+  <AdminEdit
     :isOpen="isOpenEdit"
     @update="handleUpdate"
     @close="handleClose"

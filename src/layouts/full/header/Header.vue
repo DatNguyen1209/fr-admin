@@ -7,10 +7,10 @@ const router = useRouter();
 const userProfile = ref();
 const logOut = () => {
   router.push("login");
-  window.localStorage.removeItem("userInfo");
+  window.localStorage.removeItem("token");
 };
 onMounted(() => {
-  userProfile.value = JSON.parse(localStorage.getItem("user"));
+  userProfile.value = localStorage.getItem("token");
 });
 </script>
 

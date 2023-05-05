@@ -1,11 +1,14 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import moment from "moment";
 import RoomAdd from "./RoomAdd.vue";
+import RoomEdit from "./RoomEdit.vue";
 import { useRoute } from "vue-router";
 const desserts = ref([]);
 const isOpenAdd = ref(false);
+const isOpenEdit = ref(false);
+const dataEdit = ref();
 const route = useRoute();
 
 onMounted(() => {
@@ -29,13 +32,26 @@ const openDialogAdd = (data) => {
   console.log(data);
   isOpenAdd.value = true;
 };
+const openDialogEdit = (data) => {
+  console.log(data);
+  dataEdit.value = data;
+  isOpenEdit.value = true;
+};
 const handleAdd = () => {
   console.log("run");
   isOpenAdd.value = false;
   getData();
 };
+const handleUpdate = () => {
+  console.log("run");
+  isOpenEdit.value = false;
+  getData();
+};
 const handleClose = () => {
   isOpenAdd.value = false;
+};
+const handleUpdateClose = () => {
+  isOpenEdit.value = false;
 };
 </script>
 
@@ -137,6 +153,7 @@ const handleClose = () => {
             </td>
             <td style="min-width: 160px; text-align: center">
               <v-btn
+                @click="openDialogEdit(item)"
                 icon="mdi-pencil"
                 color="warning"
                 class="mr-1"
@@ -167,6 +184,12 @@ const handleClose = () => {
     @close="handleClose"
     @add="handleAdd"
     :data="dataAdd"
+  />
+  <RoomEdit
+    :isOpen="isOpenEdit"
+    @update="handleUpdate"
+    @close="handleUpdateClose"
+    :data="dataEdit"
   />
 </template>
 <style>
