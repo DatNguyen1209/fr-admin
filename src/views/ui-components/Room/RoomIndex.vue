@@ -137,7 +137,7 @@ const handleUpdateClose = () => {
               />
             </td>
             <td class="text-center">
-              {{ item.status === 1 ? "Trống" : "Đang được sử dụng" }}
+              {{ item.status === false ? "Trống" : "Đang được sử dụng" }}
             </td>
             <td class="text-center">
               {{
