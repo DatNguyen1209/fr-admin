@@ -18,7 +18,14 @@ const rated = ref();
 const description = ref("");
 const images = ref("");
 const imgUrls = ref([]);
-
+const service = ref(["Wifi", "Nóng lạnh", "Điều hòa"]);
+const items = ref([
+  "Bể bơi",
+  "Bãi đỗ xe có nhân viên",
+  "Bồn tắm",
+  "Được phép mang thú nuôi vào",
+  "Phòng tập",
+]);
 const selectFile = async (e) => {
   try {
     const img = new FormData();
@@ -42,7 +49,10 @@ const handleAdd = async () => {
       address: address.value,
       description: description.value,
       image: imgUrls.value.map((img) => img.fileDownloadUri).join(","),
+      service: service._rawValue.join(","),
     };
+    // console.log(service.value.map((item) => item.service).join(","));
+    console.log(service._rawValue.join(","));
     const res = await axios.post("/v1/hotel/createhotel", dataAdd);
     emit("add");
   } catch (e) {
@@ -97,6 +107,15 @@ const handleClose = () => {
                   label="Điện thoại"
                   required
                 ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-combobox
+                  v-model="service"
+                  :items="items"
+                  label="I use chips"
+                  multiple
+                  chips
+                ></v-combobox>
               </v-col>
               <v-col cols="6">
                 <v-text-field

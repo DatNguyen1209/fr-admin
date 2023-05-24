@@ -21,6 +21,14 @@ const fromPrice = ref("");
 const rated = ref();
 const description = ref("");
 
+const service = ref([]);
+const items = ref([
+  "Bể bơi",
+  "Bãi đỗ xe có nhân viên",
+  "Bồn tắm",
+  "Được phép mang thú nuôi vào",
+  "Phòng tập",
+]);
 watch(
   () => props.isOpen,
   (value) => {
@@ -33,6 +41,7 @@ watch(
       rated.value = props.data?.rated;
       description.value = props.data?.description;
       imgUrlsPreview.value = props.data?.image?.split(",");
+      service.value = props.data?.service?.split(",");
     }
   }
 );
@@ -61,6 +70,7 @@ const handleUpdate = async () => {
       rated: rated.value,
       description: description.value,
       fromPrice: fromPrice.value,
+      service: service._rawValue.join(","),
     };
     const res = await axios.put(
       "http://localhost:8080/api/v1/hotel/updated/" + props.data?.id,
@@ -114,6 +124,15 @@ const handleClose = () => {
                 label="Điện thoại"
                 required
               ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-combobox
+                v-model="service"
+                :items="items"
+                label="I use chips"
+                multiple
+                chips
+              ></v-combobox>
             </v-col>
             <v-col cols="6">
               <v-text-field

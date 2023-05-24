@@ -32,11 +32,13 @@ const handleUpdate = async () => {
   try {
     const dataUpdate = {
       fullName: fullName.value,
-      userName: userName.value,
+      username: userName.value,
       phone: phone.value,
       address: address.value,
+      email: email.value,
+      id: props.data?.id,
     };
-    const res = await axios.post(
+    const res = await axios.put(
       "http://localhost:8080/api/v1/user/update/" + props.data?.id,
       dataUpdate
     );

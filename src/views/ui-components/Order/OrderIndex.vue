@@ -95,9 +95,9 @@ const handleUpdateClose = () => {
     <div class="mt-4">
       <h2 class="heading-tb mb-3">Thông tin đặt phòng</h2>
       <div>
-        <v-btn @click="openDialogAdd(item)" class="mb-4" color="secondary"
+        <!-- <v-btn @click="openDialogAdd(item)" class="mb-4" color="secondary"
           >Thêm mới</v-btn
-        >
+        > -->
       </div>
       <v-table>
         <thead>
@@ -165,7 +165,17 @@ const handleUpdateClose = () => {
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
+              Trạng thái
+            </th>
+            <th
+              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
+            >
               Chức năng
+            </th>
+            <th
+              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
+            >
+              Ghi chú
             </th>
           </tr>
         </thead>
@@ -215,6 +225,9 @@ const handleUpdateClose = () => {
                 )
               }}
             </td>
+            <td style="min-width: 130px" class="text-center">
+              {{ item.status === true ? "Đã thanh toán" : "Chưa thanh toán" }}
+            </td>
             <td style="min-width: 300px; text-align: center">
               <div v-if="item.isConfirm === null">
                 <v-btn
@@ -238,6 +251,9 @@ const handleUpdateClose = () => {
                   item.isConfirm === true ? "Đã xác nhận" : "Từ chối"
                 }}</span>
               </div>
+            </td>
+            <td style="min-width: 130px" class="text-center">
+              {{ item.delete === true ? "" : "Đã hủy" }}
             </td>
           </tr>
         </tbody>

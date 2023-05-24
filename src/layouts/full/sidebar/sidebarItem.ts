@@ -1,11 +1,11 @@
 export default [
   {
-    title: "Dashboard",
+    title: "Trang chủ",
     icon: "mdi-view-dashboard-outline",
     to: "/dashboard",
   },
   {
-    title: "Customer",
+    title: "Khách hàng",
     icon: "mdi-account",
     to: "/ui-components/customers",
   },
@@ -16,17 +16,17 @@ export default [
   },
 
   {
-    title: "Room",
-    icon: "mdi-bed",
-    to: "/ui-components/cards",
+    title: "Bài đăng",
+    icon: "mdi-post-outline",
+    to: "/ui-components/blog",
   },
   {
-    title: "Order",
+    title: "Đơn đặt",
     icon: "mdi-cart-check",
     to: "/ui-components/orders",
   },
   {
-    title: "Hotel",
+    title: "Khach sạn",
     icon: "mdi-home-map-marker",
     to: "/ui-components/hotels",
   },

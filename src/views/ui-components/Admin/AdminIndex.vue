@@ -61,7 +61,7 @@ const handleClose = () => {
   <!-- Fixed Header -->
   <!-- ----------------------------------------------------------------------------- -->
   <div>
-    <h2 class="text-center text-uppercase">Thông tin người dùng</h2>
+    <h2 class="text-center text-uppercase">Thông tin người quản trị</h2>
     <div>
       <v-btn style="cursor: default" variant="outlined" color="primary"
         >Tổng khách hàng: {{ totalElements }}</v-btn

@@ -54,6 +54,7 @@ const login = async () => {
           <v-text-field
             v-model="password"
             label="Password"
+            bg-color="purple"
             type="Password"
           ></v-text-field>
           <v-btn type="submit" color="primary" block class="mt-2"

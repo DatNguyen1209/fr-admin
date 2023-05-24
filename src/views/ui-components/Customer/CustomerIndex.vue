@@ -21,7 +21,7 @@ watch(page, () => {
 const getData = async () => {
   try {
     const res = await axios.get(
-      `http://localhost:8080/api/v1/user/getAllUserByRoleAdmin?page=${page.value}&size=5`
+      `http://localhost:8080/api/v1/user/getAllUserByRoleUser?page=${page.value}&size=5`
     );
     console.log(res.data.content);
     desserts.value = res.data.content;
