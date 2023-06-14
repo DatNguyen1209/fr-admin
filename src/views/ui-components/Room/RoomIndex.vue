@@ -8,16 +8,19 @@ import { useRoute } from "vue-router";
 const desserts = ref([]);
 const isOpenAdd = ref(false);
 const isOpenEdit = ref(false);
+
 const dataEdit = ref();
 const route = useRoute();
-
+const dialog = ref(false);
+const deleteData = ref([]);
+const deleteItem = ref(false);
 onMounted(() => {
   console.log(route.params.id);
   getData();
 });
-// watch(page, () => {
-//   getData();
-// });
+watch(desserts, () => {
+  getData();
+});
 const getData = async () => {
   try {
     const res = await axios.get(
@@ -53,6 +56,22 @@ const handleClose = () => {
 const handleUpdateClose = () => {
   isOpenEdit.value = false;
 };
+const openDelete = async (data) => {
+  try {
+    deleteData.value = data;
+    const detele = {
+      status: deleteItem.value,
+    };
+    const success = await axios.put(
+      "http://localhost:8080/api/v1/room/delete/" + deleteData.value.id,
+      detele
+    );
+    dialog.value = false;
+  } catch (e) {
+    console.log(e);
+  }
+};
+const handleDelete = async (data) => {};
 </script>
 
 <template>
@@ -137,7 +156,9 @@ const handleUpdateClose = () => {
               />
             </td>
             <td class="text-center">
-              {{ item.status === false ? "Trống" : "Đang được sử dụng" }}
+              {{
+                item.status === false ? "Ngừng hoạt động" : "Đang được sử dụng"
+              }}
             </td>
             <td class="text-center">
               {{
@@ -161,7 +182,7 @@ const handleUpdateClose = () => {
               ></v-btn>
               <v-btn
                 icon="mdi-delete"
-                @click="openDialogDelete(item)"
+                @click="openDelete(item)"
                 color="errorr"
                 size="small"
               ></v-btn>
@@ -170,6 +191,38 @@ const handleUpdateClose = () => {
         </tbody>
       </v-table>
     </div>
+    <template>
+      <v-row justify="space-around">
+        <v-dialog
+          v-model="dialog"
+          transition="dialog-top-transition"
+          persistent
+          width="auto"
+        >
+          <v-card>
+            <v-card-title class="text-h5"> Cảnh báo! </v-card-title>
+            <v-card-text>Bạn có chắc muốn xóa không?</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="red-darken-1"
+                variant="text"
+                @click="dialog = false"
+              >
+                Không
+              </v-btn>
+              <v-btn
+                color="green-darken-1"
+                variant="text"
+                @click="handleDelete(item)"
+              >
+                Đồng ý
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </template>
   </div>
   <!-- <div class="text-center">
     <v-pagination

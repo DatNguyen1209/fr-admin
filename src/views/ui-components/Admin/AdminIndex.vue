@@ -2,10 +2,12 @@
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import AdminEdit from "./AdminEdit.vue";
+import AdminAdd from "./AdminAdd.vue";
 import moment from "moment";
 const desserts = ref([]);
 const page = ref(1);
 const isOpenEdit = ref(false);
+const isOpenAdd = ref(false);
 const dataEdit = ref();
 const totalPage = ref(0);
 const totalElements = ref(0);
@@ -21,7 +23,7 @@ watch(page, () => {
 const getData = async () => {
   try {
     const res = await axios.get(
-      `http://localhost:8080/api/v1/user/getAllUserByRoleUser?page=${page.value}&size=5`
+      `http://localhost:8080/api/v1/user/getAllUserByRoleAdmin?page=${page.value}&size=5`
     );
     console.log(res.data.content);
     desserts.value = res.data.content;
@@ -54,6 +56,17 @@ const handleUpdate = () => {
 const handleClose = () => {
   isOpenEdit.value = false;
 };
+const openDialogAdd = () => {
+  isOpenAdd.value = true;
+};
+const handleAdd = () => {
+  console.log("run");
+  isOpenAdd.value = false;
+  getData();
+};
+const handleAddClose = () => {
+  isOpenAdd.value = false;
+};
 </script>
 
 <template>
@@ -65,6 +78,11 @@ const handleClose = () => {
     <div>
       <v-btn style="cursor: default" variant="outlined" color="primary"
         >Tổng khách hàng: {{ totalElements }}</v-btn
+      >
+    </div>
+    <div>
+      <v-btn @click="openDialogAdd()" class="mb-4 mt-3" color="secondary"
+        >Thêm mới</v-btn
       >
     </div>
     <div class="mt-4">
@@ -129,6 +147,12 @@ const handleClose = () => {
       ></v-pagination>
     </div>
   </div>
+  <AdminAdd
+    :isOpen="isOpenAdd"
+    @add="handleAdd"
+    @close="handleAddClose"
+    :data="dataAdd"
+  />
   <AdminEdit
     :isOpen="isOpenEdit"
     @update="handleUpdate"

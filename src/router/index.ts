@@ -38,6 +38,11 @@ const router = createRouter({
           component: () => import("@/views/ui-components/Hotels.vue"),
         },
         {
+          name: "Admins",
+          path: "ui-components/admins",
+          component: () => import("@/views/ui-components/Admin.vue"),
+        },
+        {
           name: "Orders",
           path: "ui-components/orders",
           component: () => import("@/views/ui-components/Orders.vue"),

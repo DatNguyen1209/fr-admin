@@ -7,4 +7,5 @@
 </template>
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+const user = localStorage.getItem("username");
 </script>

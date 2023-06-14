@@ -87,7 +87,9 @@ const handleClose = () => {
             <td class="text-center">{{ item.username }}</td>
             <td class="text-center">{{ item.fullName }}</td>
             <td class="text-center">{{ item.phone }}</td>
-            <td class="text-center">{{ item.address }}</td>
+            <td style="min-width: 140px" class="text-center">
+              {{ item.address }}
+            </td>
             <td class="text-center">
               {{
                 moment(item.createdDate).format("dddd, MMMM Do YYYY, h:mm:ss a")

@@ -5,6 +5,7 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const userProfile = ref();
+const user = localStorage.getItem("username");
 const logOut = () => {
   router.push("login");
   window.localStorage.removeItem("token");
@@ -29,15 +30,11 @@ onMounted(() => {
           plain
           :ripple="false"
         >
-          <v-avatar size="45">
-            <img src="@/assets/images/users/user2.jpg" alt="Julia" />
-          </v-avatar>
+          <span style="color: black">Thành viên quản trị: {{ user }}</span>
         </v-btn>
       </template>
 
       <v-list class="pa-6" elevation="10" rounded="lg" @submit.prevent="logOut">
-        <v-list-item class="pa-3 mb-2" rounded="lg"> </v-list-item>
-        <v-list-item class="pa-3 mb-2" rounded="lg"> </v-list-item>
         <v-btn
           @click="logOut"
           type="submit"
@@ -45,7 +42,7 @@ onMounted(() => {
           color="secondary"
           variant="contained"
           class="mt-4 py-4"
-          >Logout</v-btn
+          >Đăng xuất</v-btn
         >
       </v-list>
     </v-menu>

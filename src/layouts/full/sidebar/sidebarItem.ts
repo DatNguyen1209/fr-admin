@@ -10,9 +10,9 @@ export default [
     to: "/ui-components/customers",
   },
   {
-    title: "Feedback",
-    icon: "mdi-pencil-box-multiple-outline",
-    to: "/ui-components/alert",
+    title: "Người quản trị",
+    icon: "mdi-security",
+    to: "/ui-components/admins",
   },
 
   {

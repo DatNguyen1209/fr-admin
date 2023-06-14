@@ -129,6 +129,11 @@ const handleUpdateClose = () => {
             <th
               class="text-subtitle-1 font-weight-bold text-center font-weight-black"
             >
+              Trạng thái
+            </th>
+            <th
+              class="text-subtitle-1 font-weight-bold text-center font-weight-black"
+            >
               Chức năng
             </th>
           </tr>
@@ -141,7 +146,9 @@ const handleUpdateClose = () => {
             <td style="min-width: 200px" class="text-center">
               {{ item.address }}
             </td>
-            <td class="text-center">{{ item.phone }}</td>
+            <td style="min-width: 140px" class="text-center">
+              {{ item.phone }}
+            </td>
             <td class="text-center">{{ item.fromPrice }} VNĐ</td>
             <td style="min-width: 230px" class="text-center">
               {{ item.description }}
@@ -174,6 +181,9 @@ const handleUpdateClose = () => {
                   "dddd, MMMM Do YYYY, h:mm:ss a"
                 )
               }}
+            </td>
+            <td style="min-width: 130px" class="text-center">
+              {{ item.status === true ? "Đang hợp tác" : "Ngừng hợp tác" }}
             </td>
             <td style="min-width: 160px; text-align: center">
               <v-btn
